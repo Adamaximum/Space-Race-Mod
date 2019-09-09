@@ -4,16 +4,21 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
+    public GameManager gm;
+
     public float playerSpeed = 0.2f;
 
     float verticalInput = 0;
 
     public float originY;
 
+    bool border;
     
     // Start is called before the first frame update
     void Start()
     {
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+
         originY = transform.position.y;
     }
 
@@ -21,6 +26,15 @@ public class PlayerControl : MonoBehaviour
     void Update()
     {
         PlayerMove();
+
+        if (transform.position.y < -4.56)
+        {
+            border = true;
+        }
+        else
+        {
+            border = false;
+        }
     }
 
     void PlayerMove()
@@ -31,7 +45,7 @@ public class PlayerControl : MonoBehaviour
             {
                 verticalInput = playerSpeed;
             }
-            else if (Input.GetKey(KeyCode.S))
+            else if (Input.GetKey(KeyCode.S) && border == false)
             {
                 verticalInput = -playerSpeed;
             }
@@ -48,7 +62,7 @@ public class PlayerControl : MonoBehaviour
             {
                 verticalInput = playerSpeed;
             }
-            else if (Input.GetKey(KeyCode.DownArrow))
+            else if (Input.GetKey(KeyCode.DownArrow) && border == false)
             {
                 verticalInput = -playerSpeed;
             }
@@ -66,6 +80,19 @@ public class PlayerControl : MonoBehaviour
         if(collision.gameObject.tag == "Righty" || collision.gameObject.tag == "Lefty")
         {
             transform.position = new Vector3(transform.position.x, originY, 0);
+        }
+
+        if(collision.gameObject.tag == "RespawnTop")
+        {
+            transform.position = new Vector3(transform.position.x, originY, 0);
+            if (gameObject.tag == "Player1")
+            {
+                gm.p1Score++;
+            }
+            if (gameObject.tag == "Player2")
+            {
+                gm.p2Score++;
+            }
         }
     }
 }
