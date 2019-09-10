@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public GameManagerMod gm;
+    public GameManager gm;
 
     public float playerSpeed = 0.2f;
 
@@ -13,11 +13,20 @@ public class PlayerControl : MonoBehaviour
     public float originY;
 
     bool border;
-    
+
+    public float shootReset;
+    public float shootSpawn;
+
+    public GameObject shootStar;
+
+    float lowestStarPosY = -3.5f;
+    float highestStarPosY = 4.7f;
+    bool shootGo;
+
     // Start is called before the first frame update
     void Start()
     {
-        gm = GameObject.Find("GameManager").GetComponent<GameManagerMod>();
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         originY = transform.position.y;
     }
@@ -42,12 +51,23 @@ public class PlayerControl : MonoBehaviour
         {
             border = false;
         }
+
+        if (transform.position.y >= lowestStarPosY && transform.position.y <= highestStarPosY)
+        {
+            shootGo = true;
+        }
+        else
+        {
+            shootGo = false;
+        }
     }
 
     void PlayerMove()
     {
         if(gameObject.tag == "Player1")
         {
+            shootSpawn = transform.position.x + 0.4f;
+
             if (Input.GetKey(KeyCode.W))
             {
                 verticalInput = playerSpeed;
@@ -62,9 +82,19 @@ public class PlayerControl : MonoBehaviour
             }
 
             transform.position += new Vector3(0, verticalInput, transform.position.z);
+
+            shootReset++;
+
+            if (Input.GetKeyDown(KeyCode.Space) && shootReset >= 50 && shootGo == true)
+            {
+                Instantiate(shootStar,new Vector3(shootSpawn,transform.position.y,0), Quaternion.identity);
+                shootReset = 0;
+            }
         }
         if (gameObject.tag == "Player2")
         {
+            shootSpawn = transform.position.x - 0.4f;
+
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 verticalInput = playerSpeed;
@@ -79,6 +109,14 @@ public class PlayerControl : MonoBehaviour
             }
 
             transform.position += new Vector3(0, verticalInput, transform.position.z);
+
+            shootReset++;
+
+            if (Input.GetKeyDown(KeyCode.RightShift) && shootReset >= 50 && shootGo == true)
+            {
+                Instantiate(shootStar, new Vector3(shootSpawn, transform.position.y, 0), Quaternion.identity);
+                shootReset = 0;
+            }
         }
     }
 

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TimerControl : MonoBehaviour
 {
-    public GameManagerMod gm;
+    public GameManager gm;
 
     public float originY;
     public float posY;
@@ -12,7 +12,7 @@ public class TimerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gm = GameObject.Find("GameManager").GetComponent<GameManagerMod>();
+        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
 
         originY = transform.position.y;
         posY = originY;
