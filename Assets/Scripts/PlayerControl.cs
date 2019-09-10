@@ -25,9 +25,16 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        PlayerMove();
+        if (gm.gameState == 1)
+        {
+            PlayerMove();
+        }
+        else
+        {
+            transform.position = new Vector3(transform.position.x, originY, 0);
+        }
 
-        if (transform.position.y < -4.56)
+        if (transform.position.y < originY)
         {
             border = true;
         }

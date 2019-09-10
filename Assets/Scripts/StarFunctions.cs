@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class StarFunctions : MonoBehaviour
 {
-    float starSpeed = 0.03f;
+    float starSpeed = 0.035f;
     float horizontalMovement;
     
     float resetXRight = -7.9f;
