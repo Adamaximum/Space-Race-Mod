@@ -21,7 +21,7 @@ public class PlayerControl : MonoBehaviour
 
     float lowestStarPosY = -3.5f;
     float highestStarPosY = 4.7f;
-    bool shootGo;
+    public bool shootGo;
 
     // Start is called before the first frame update
     void Start()
@@ -125,6 +125,14 @@ public class PlayerControl : MonoBehaviour
         if(collision.gameObject.tag == "Righty" || collision.gameObject.tag == "Lefty")
         {
             transform.position = new Vector3(transform.position.x, originY, 0);
+            if (gameObject.tag == "Player1" && gm.p1Score > 0)
+            {
+                gm.p1Score--;
+            }
+            if (gameObject.tag == "Player2" && gm.p2Score > 0)
+            {
+                gm.p2Score--;
+            }
         }
 
         if(collision.gameObject.tag == "RespawnTop")
