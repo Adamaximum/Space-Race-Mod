@@ -23,6 +23,8 @@ public class PlayerControl : MonoBehaviour
     float highestStarPosY = 4.7f;
     public bool shootGo;
 
+    public AudioSource shoot;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -89,6 +91,8 @@ public class PlayerControl : MonoBehaviour
             {
                 Instantiate(shootStar,new Vector3(shootSpawn,transform.position.y,0), Quaternion.identity);
                 shootReset = 0;
+
+                shoot.Play();
             }
         }
         if (gameObject.tag == "Player2")
@@ -116,6 +120,8 @@ public class PlayerControl : MonoBehaviour
             {
                 Instantiate(shootStar, new Vector3(shootSpawn, transform.position.y, 0), Quaternion.identity);
                 shootReset = 0;
+
+                shoot.Play();
             }
         }
     }
