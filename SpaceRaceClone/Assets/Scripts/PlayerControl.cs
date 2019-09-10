@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public GameManager gm;
+    public GameManagerMod gm;
 
     public float playerSpeed = 0.2f;
 
@@ -17,7 +17,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gm = GameObject.Find("GameManager").GetComponent<GameManager>();
+        gm = GameObject.Find("GameManager").GetComponent<GameManagerMod>();
 
         originY = transform.position.y;
     }

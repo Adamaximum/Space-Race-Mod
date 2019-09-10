@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class GameManager : MonoBehaviour
+public class GameManagerMod : MonoBehaviour
 {
     public int gameState;
     //0 = Menu
